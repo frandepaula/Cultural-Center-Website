@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Community Education Center</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link href="https://fonts.cdnfonts.com/css/englebert" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+  <link href="../static/css/styles.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../static/galeria/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+  <!-- Lightbox CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+
+<!-- jQuery (certifique-se de incluir antes do Lightbox) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Lightbox JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+
+   
+</head>
+<body>
+  <div class="wrapper">
+    <!-- filter Items -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/"><img src="../static/home/images/logo-no-background.png"></a>
+
+<ul class="navbar-nav mx-auto">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+   
+      </div>
+    </nav>
+    <!-- filter Images -->
+    <div class="gallery"></div>
+  </div>
+  <!-- fullscreen img preview box -->
+  <div class="preview-box">
+    <div class="details">
+      <span class="title">Image Category: <p></p></span>
+      <span class="icon fas fa-times"></span>
+    </div>
+    <div class="image-box"><img src="" alt=""></div>
+  </div>
+  <div class="shadow"></div>
+
+<script src="../static/galeria/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+
+
+<script>
+  window.addEventListener('DOMContentLoaded', function() {
+    var gallery = document.querySelector('.gallery');
+    var imageDirectory = '../static/galeria/imagens/';
+    var imageFormats = ['.jpg', '.jpeg']; // Extensões possíveis
+    var numberOfImages = 14; // Número total de imagens
+
+    for (var i = 1; i <= numberOfImages; i++) {
+      var imageDiv = document.createElement('div');
+      imageDiv.classList.add('image');
+      imageDiv.dataset.name = 'Image ' + i;
+
+      for (var j = 0; j < imageFormats.length; j++) {
+        var imageFormat = imageFormats[j];
+        var imageName = i + imageFormat;
+
+        var image = document.createElement('img');
+        image.src = imageDirectory + imageName;
+        image.alt = '';
+        image.classList.add('clickable-image');
+
+        image.addEventListener('click', function() {
+          showFullscreenImage(this.src);
+        });
+
+        imageDiv.appendChild(image);
+      }
+
+      gallery.appendChild(imageDiv);
+    }
+
+    function showFullscreenImage(imageSrc) {
+      var fullscreenImage = document.createElement('div');
+      fullscreenImage.classList.add('fullscreen-image');
+      fullscreenImage.innerHTML = '<img src="' + imageSrc + '" alt="">';
+      document.body.appendChild(fullscreenImage);
+
+      // Remove a imagem em tela cheia quando clicada novamente
+      fullscreenImage.addEventListener('click', function() {
+        document.body.removeChild(fullscreenImage);
+      });
+    }
+  });
+</script>
+
+
+</body>
+</html>
